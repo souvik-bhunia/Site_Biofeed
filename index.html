@@ -1241,7 +1241,7 @@
         btn.style.opacity = '1';
         status.style.display = 'block';
         status.style.color   = '#c8622a';
-        status.textContent   = '❌ Something went wrong. Please try again.';
+        status.textContent   = '❌ Error: ' + (err.text || err.message || JSON.stringify(err));
         console.error('EmailJS error:', err);
       });
   }
