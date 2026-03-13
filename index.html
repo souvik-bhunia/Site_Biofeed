@@ -1264,7 +1264,7 @@
 <!-- Google Sheets Integration -->
 <script>
   // ── PASTE YOUR GOOGLE APPS SCRIPT URL HERE ──
-  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzqjcoDqyiX5BEykEr7WHujykrGNWSTOjvLGn0rcXf8R2Ya-j0ZQxRPgMCqDXBleAV1Rg/exec';
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzKJCOIpbsfWox8Px4-h260HM3h15ECuwh8Kjvt1Q_1xw1aqrkxyZNuUyNvOx29ACSzsQ/exec';
 
   function submitToSheets() {
     const btn    = document.getElementById('submitBtn');
@@ -1302,13 +1302,9 @@
     params.append('interest',     interest);
     params.append('message',      msg);
 
-    fetch(SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString()
-    })
-      .then(() => {
+    const img = new Image();
+    img.src = SHEET_URL + '?' + params.toString();
+    img.onload = img.onerror = () => {
         btn.textContent       = 'Message Sent ✓';
         btn.style.background  = 'var(--green-dark)';
         btn.style.borderColor = 'var(--green-dark)';
@@ -1325,15 +1321,7 @@
         document.getElementById('country').value      = '';
         document.getElementById('interest').value     = '';
         document.getElementById('country_code').value = '+91';
-      })
-      .catch(() => {
-        btn.textContent   = 'Send Message';
-        btn.disabled      = false;
-        btn.style.opacity = '1';
-        status.style.display = 'block';
-        status.style.color   = '#c8622a';
-        status.textContent   = '❌ Something went wrong. Please try again.';
-      });
+    };
   }
 
   // ── Scroll fade-in ──
