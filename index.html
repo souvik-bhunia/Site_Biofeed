@@ -1296,7 +1296,7 @@
     params.append('timestamp',    new Date().toLocaleString());
     params.append('name',         name);
     params.append('email',        email);
-    params.append('phone',        code + ' ' + phone);
+    params.append('phone', code.replace('+','') + '-' + phone);
     params.append('country',      country);
     params.append('organization', org || 'Not provided');
     params.append('interest',     interest);
